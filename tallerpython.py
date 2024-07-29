@@ -1,10 +1,10 @@
 import subprocess
 
 def get_modified_files():
-    # Ejecuta el comando git diff y captura la salida
-    output = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD~', 'HEAD'])
-    # Decodifica la salida a string y elimina el salto de línea al final
-    modified_files = output.decode('utf-8').strip()
+    try:
+        modified_files = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD~', 'HEAD']).decode('utf-8').splitlines()
+    except subprocess.CalledProcessError:
+        modified_files = []
     return modified_files
 
 if __name__ == '__main__':
