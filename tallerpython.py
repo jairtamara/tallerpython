@@ -1,12 +1,24 @@
-import subprocess
+import os
+import git
 
-def get_modified_files():
-    try:
-        modified_files = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD~', 'HEAD']).decode('utf-8').splitlines()
-    except subprocess.CalledProcessError:
-        modified_files = []
-    return modified_files
+# Clona el repositorio
+repo = git.Repo('.')
 
-if __name__ == '__main__':
-    modified_files = get_modified_files()
-    print(modified_files)
+# Obtiene la lista de archivos modificados o nuevos
+modified_files = []
+for file in repo.git.diff('--name-only', 'HEAD~', 'HEAD').splitlines():
+    modified_files.append(file)
+
+# Obtiene la lista de archivos nuevos
+new_files = []
+for file in repo.git.ls_files('--others', '--exclude-standard').splitlines():
+    new_files.append(file)
+
+# Imprime la lista de archivos modificados o nuevos
+print("Archivos modificados:")
+for file in modified_files:
+    print(file)
+
+print("Archivos nuevos:")
+for file in new_files:
+    print(file)
