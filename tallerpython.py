@@ -1,13 +1,26 @@
 import git
 
-def get_changes(repo, file_path):
-    commits = repo.git.log('--oneline', '--', file_path).splitlines()
-    return commits
+def get_differences(repo):
+    # Obtener el commit actual y el commit anterior
+    current_commit = repo.commit('HEAD')
+    previous_commit = repo.commit('HEAD~1')
 
+    # Obtener las diferencias entre los dos commits
+    differences = current_commit.diff(previous_commit, create_patch=True)
+
+    # Crear una lista con las diferencias
+    differences_list = []
+    for diff in differences:
+        differences_list.append(diff)
+
+    return differences_list
+
+# Inicializar el repositorio Git
 repo = git.Repo()
-file_path = sys.argv[1]
-changes = get_changes(repo, file_path)
 
-print("Cambios en el archivo:", file_path)
-for change in changes:
-    print(change)
+# Obtener las diferencias
+differences = get_differences(repo)
+
+# Imprimir las diferencias
+for difference in differences:
+    print(difference)
