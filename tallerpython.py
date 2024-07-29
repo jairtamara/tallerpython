@@ -1,24 +1,13 @@
-import os
 import git
 
-# Clona el repositorio
-repo = git.Repo('.')
+def get_changes(repo, file_path):
+    commits = repo.git.log('--oneline', '--', file_path).splitlines()
+    return commits
 
-# Obtiene la lista de archivos modificados o nuevos
-modified_files = []
-for file in repo.git.diff('--name-only', 'HEAD~1', 'HEAD').splitlines():
-    modified_files.append(file)
+repo = git.Repo()
+file_path = sys.argv[1]
+changes = get_changes(repo, file_path)
 
-# Obtiene la lista de archivos nuevos
-new_files = []
-for file in repo.git.ls_files('--others', '--exclude-standard').splitlines():
-    new_files.append(file)
-
-# Imprime la lista de archivos modificados o nuevos
-print("Archivos modificados:")
-for file in modified_files:
-    print(file)
-
-print("Archivos nuevos:")
-for file in new_files:
-    print(file)
+print("Cambios en el archivo:", file_path)
+for change in changes:
+    print(change)
