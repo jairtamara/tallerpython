@@ -6,7 +6,7 @@ repo = git.Repo('.')
 
 # Obtiene la lista de archivos modificados o nuevos
 modified_files = []
-for file in repo.git.diff('--name-only', 'HEAD~', 'HEAD').splitlines():
+for file in repo.git.diff('--name-only', 'HEAD~1', 'HEAD').splitlines():
     modified_files.append(file)
 
 # Obtiene la lista de archivos nuevos
