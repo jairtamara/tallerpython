@@ -2,7 +2,10 @@ import git
 
 def get_differences(repo):
     # Obtener las diferencias entre el commit actual y el commit anterior
-    diff = repo.git.diff('HEAD~1', 'HEAD', '--name-only')
+    #diff = repo.git.diff('HEAD~1', 'HEAD', '--name-only')Unix
+
+    diff = $(git diff --name-only HEAD~1 HEAD)
+    echo "$MODIFIED"    
 
     # Crear una lista con las diferencias
     differences_list = diff.splitlines()
