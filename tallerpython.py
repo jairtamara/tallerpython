@@ -2,7 +2,7 @@ import git
 
 def get_differences(repo): 
     repo = Repo('.')
-    modified_files = repo.git.diff('HEAD~1', 'HEAD', name_only=True)
+    modified_files = repo.git.diff('HEAD~1')
     print(modified_files)
   
 
