@@ -7,6 +7,7 @@ def get_differences(repo):
   diffs = repo.index.diff(repo.head.commit)
   for d in diffs:
     print(d.a_path)
+    print(diffs)
 
 
     # Crear una lista con las diferencias
@@ -21,5 +22,5 @@ repo = git.Repo()
 differences = get_differences(repo)
 
 # Imprimir las diferencias
-for difference in differences:
-    print(difference)
+#for difference in differences:
+ #   print(difference)
