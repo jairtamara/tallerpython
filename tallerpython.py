@@ -4,8 +4,10 @@ def get_differences(repo):
     # Obtener las diferencias entre el commit actual y el commit anterior
     #diff = repo.git.diff('HEAD~1', 'HEAD', '--name-only')Unix
 
-   MODIFIED=$(git diff --name-only HEAD~ HEAD)
-   echo "$MODIFIED"
+  diffs = repo.index.diff(repo.head.commit)
+  for d in diffs:
+    print(d.a_path)
+
 
     # Crear una lista con las diferencias
     differences_list = diff.splitlines()
