@@ -5,8 +5,8 @@ def get_differences():
     repo = Repo('.')
     
     # Obtén las diferencias entre el HEAD y el ORIG_HEAD
-    modified_files = repo.git.diff('HEAD', 'FETCH_HEAD', '--name-only')
-    
+    #modified_files = repo.git.diff('HEAD', 'FETCH_HEAD', '--name-only')
+    modified_files = repo.git.diff('--name-only', 'HEAD~1', 'HEAD').split('\n')    
     return modified_files
 
 if __name__ == "__main__":
