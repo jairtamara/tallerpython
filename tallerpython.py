@@ -1,12 +1,19 @@
-import git
+from git import Repo
 
-def get_differences(repo): 
+def get_differences():
+    # Inicializa el repositorio en el directorio actual
     repo = Repo('.')
-    modified_files = repo.git.diff('HEAD~1')
-    print(modified_files)
-  
-
     
-  #diffs = repo.index.diff(repo.head.commit)
-  #for d in diffs:
-    #print(f"Archivo modificado: {d.a_path}") 
+    # Obtén las diferencias entre el HEAD y el ORIG_HEAD
+    modified_files = repo.git.diff('ORIG_HEAD', 'HEAD')
+    
+    return modified_files
+
+if __name__ == "__main__":
+    diferencias = get_differences()
+    
+    if diferencias:
+        print("Archivos modificados después del último push:")
+        print(diferencias)
+    else:
+        print("No hay diferencias después del último push.")
