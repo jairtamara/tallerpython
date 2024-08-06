@@ -1,13 +1,9 @@
 import git
 
-def get_differences(repo):
-    # Obtener las diferencias entre el commit actual y el commit anterior
-    repo = git.Repo('.')
-   # diff = repo.git.diff('HEAD', 'HEAD~1', '--name-only')
-    #for d in diffs:
-        #print(f"Archivo modificado: {d.a_path}") 
-        MODIFIED=$(git diff --name-only HEAD~ HEAD)
-        echo "$MODIFIED"
+def get_differences(repo): 
+    repo = Repo('.')
+    modified_files = repo.git.diff('HEAD~1', 'HEAD', name_only=True)
+    print(modified_files)
   
 
     
