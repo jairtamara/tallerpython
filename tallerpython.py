@@ -13,8 +13,10 @@ if __name__ == "__main__":
     diferencias = get_differences()
     
     if diferencias:
-        print("Archivos modificados después del último push:")
-        print(diferencias)
+        print("Archivos modificados :")
+        for mis_diferencias in diferencias:
+            print(mis_diferencias)
+    count = len(mis_diferencias)    
     else:
         print("No hay diferencias después del último push.")
 
