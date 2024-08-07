@@ -10,7 +10,7 @@ def get_differences():
         print("Archivos modificados :")
         for mis_diferencias in modified_files:
             print(mis_diferencias)
-        contador = len(mis_diferencias)
+        contador = len(modified_files)
         print(contador)
     return modified_files
 
