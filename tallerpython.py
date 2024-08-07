@@ -6,6 +6,15 @@ def get_differences():
     
     # Obtén las diferencias entre el HEAD y el ORIG_HEAD
     #modified_files = repo.git.diff('HEAD', 'FETCH_HEAD', '--name-only')
-    #modified_files = repo.git.diff('--name-only', 'HEAD','HEAD') 
-    modified_files = repo.git.diff('--name-only', 'HEAD~1', 'HEAD~0')
+    modified_files = repo.git.diff('--name-only', 'HEAD~1', 'HEAD').split('\n')    
     return modified_files
+
+if __name__ == "__main__":
+    diferencias = get_differences()
+    
+    if diferencias:
+        print("Archivos modificados después del último push:")
+        print(diferencias)
+    else:
+        print("No hay diferencias después del último push.")
+
