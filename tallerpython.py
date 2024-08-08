@@ -1,15 +1,10 @@
 import git
-import os
 
 def get_differences(repo):
-    # Correcta indentación
+    # Obtener las diferencias entre el commit actual y el commit anterior
     diff = repo.git.diff('HEAD~1', 'HEAD', '--name-only')
-    with open('log.diff', 'w') as f:
-        # Correcta indentación
-        for d in diffs:
-            # Correcta indentación
-            f.write(f"Archivo modificado: {d.a_path}\n")
+    for file in diff.splitlines():
+        print(f"Archivo modificado: {file}")
 
-# Correcta indentación
 repo = git.Repo()
 get_differences(repo)
