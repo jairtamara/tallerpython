@@ -7,5 +7,5 @@ def get_differences(repo):
         for file in diff.splitlines():
             f.write(f"Archivo modificado: {file}\n")
 
-repo = git.Repo()
+repo = git.Repo(".")
 get_differences(repo)
