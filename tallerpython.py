@@ -25,5 +25,3 @@ def get_differences(log_file='diff_log.lis'):
 
 # Ejemplo de uso
 get_differences()
-
-get_differences()
