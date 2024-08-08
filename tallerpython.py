@@ -14,17 +14,15 @@ def get_differences(log_file='diff_log.lis'):
             summary = f"Archivo modificado: {d.a_path}"
             log.write(summary + '\n')  # Escribir el resumen en el archivo .lis
 
-    # Leer el contenido del log para agregarlo al summary de GitHub Actions
+    # Leer el contenido del log
     with open(log_file, 'r') as log:
         log_content = log.read()
 
-    # Verificar si GITHUB_STEP_SUMMARY está disponible y escribir en él
+    # Escribir el contenido del log en el summary de GitHub Actions usando echo
     summary_file = os.getenv('GITHUB_STEP_SUMMARY')
     if summary_file:
-        with open(summary_file, 'a') as summary:
-            summary.write("### Resumen de cambios\n")
-            summary.write(log_content)
-            summary.write("\n")
+        os.system(f'echo "### Resumen de cambios" >> {summary_file}')
+        os.system(f'echo "{log_content}" >> {summary_file}')
     else:
         print("GITHUB_STEP_SUMMARY no está disponible.")
 
