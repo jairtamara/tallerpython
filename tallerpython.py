@@ -3,8 +3,9 @@ import git
 def get_differences(repo):
     # Obtener las diferencias entre el commit actual y el commit anterior
     diff = repo.git.diff('HEAD~1', 'HEAD', '--name-only')
-    for file in diff.splitlines():
-        print(f"Archivo modificado: {file}")
+    with open('log.diff', 'w') as f:
+        for file in diff.splitlines():
+            f.write(f"Archivo modificado: {file}\n")
 
 repo = git.Repo()
 get_differences(repo)
