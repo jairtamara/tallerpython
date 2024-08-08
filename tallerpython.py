@@ -1,4 +1,5 @@
 import git
+import os
 
 def get_differences(log_file='diff_log.lis'):
     # Inicializar el repositorio en la ruta actual
@@ -17,11 +18,15 @@ def get_differences(log_file='diff_log.lis'):
     with open(log_file, 'r') as log:
         log_content = log.read()
 
-    # Escribir en el summary de GitHub Actions
-    with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
-        summary.write("### Resumen de cambios\n")
-        summary.write(log_content)
-        summary.write("\n")
+    # Verificar si GITHUB_STEP_SUMMARY está disponible y escribir en él
+    summary_file = os.getenv('GITHUB_STEP_SUMMARY')
+    if summary_file:
+        with open(summary_file, 'a') as summary:
+            summary.write("### Resumen de cambios\n")
+            summary.write(log_content)
+            summary.write("\n")
+    else:
+        print("GITHUB_STEP_SUMMARY no está disponible.")
 
 # Ejemplo de uso
 get_differences()
