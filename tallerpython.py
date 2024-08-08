@@ -10,10 +10,20 @@ def get_differences(log_file='diff_log.lis'):
     # Abrir el archivo en modo append y escribir el resumen
     with open(log_file, 'a') as log:
         for d in diffs:
-            # Obtener el resumen del diff
             summary = f"Archivo modificado: {d.a_path}"
-            print(summary)  # Muestra el resumen en la consola (opcional)
             log.write(summary + '\n')  # Escribir el resumen en el archivo .lis
 
+    # Leer el contenido del log para agregarlo al summary de GitHub Actions
+    with open(log_file, 'r') as log:
+        log_content = log.read()
+
+    # Escribir en el summary de GitHub Actions
+    with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+        summary.write("### Resumen de cambios\n")
+        summary.write(log_content)
+        summary.write("\n")
+
 # Ejemplo de uso
+get_differences()
+
 get_differences()
