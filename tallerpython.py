@@ -6,6 +6,6 @@ def get_differences(repo):
     with open('log.diff', 'w') as f:
         for file in diff.splitlines():
             #f.write(f"Archivo modificado: {file}\n")
-            f.write("Archivo modificado: " + file + "\n")  
+            #f.write("Archivo modificado: " + file + "\n")  
 repo = git.Repo(".")
 get_differences(repo)
