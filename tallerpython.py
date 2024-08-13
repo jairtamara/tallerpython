@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import git
 
 def get_differences(repo):
